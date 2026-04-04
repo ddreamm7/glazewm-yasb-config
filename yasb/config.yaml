@@ -1,0 +1,299 @@
+watch_stylesheet: true
+watch_config: true
+debug: false
+bars:
+  status-bar:
+    enabled: true
+    screens: ["*"]
+    class_name: "yasb-bar"
+    alignment:
+      position: "top"
+      center: true
+    animation:
+      enabled: true
+      duration: 500
+    blur_effect:
+      enabled: true
+      acrylic: false
+      dark_mode: false
+      round_corners: false
+    window_flags:
+      always_on_top: false
+      windows_app_bar: true
+    dimensions:
+      width: "100%"
+      height: 48
+    padding:
+      top: 0
+      left: 0
+      bottom: 0
+      right: 0
+    widgets:
+      left:
+        [
+          "home",
+          "clock",
+          "volume",
+          "quick_launch",
+          "glazewm_tiling_direction",
+          "glazewm_workspaces",
+        ]
+      center: ["media"]
+      right:
+        [
+          "glazewm_binding_mode",
+          "cpu",
+          "memory",
+          "gpu",
+          "notifications",
+          "power_menu",
+        ]
+widgets:
+  home:
+    type: "yasb.home.HomeWidget"
+    options:
+      blur: true
+      round_corners: true
+      label: "<span>\ued04</span>"
+      menu_list:
+        - { title: "Home", path: "~" }
+        - { title: "Downloads", path: "C:\\Users\\aalon\\Downloads" }
+        - { title: "Documents", path: "C:\\Users\\aalon\\OneDrive\\Documents" }
+        - { title: "Pictures", path: "C:\\Users\\aalon\\OneDrive\\Pictures" }
+        - { title: "Videos", path: "C:\\Users\\aalon\\OneDrive\\Videos" }
+        - { title: "Music", path: "C:\\Users\\aalon\\OneDrive\\Music" }
+      system_menu: true
+      power_menu: false
+      alignment: "left"
+      direction: "down"
+      offset_left: 16
+  clock:
+    type: "yasb.clock.ClockWidget"
+    options:
+      label: "<span>\udb82\udd54</span>{%I:%M %p}"
+      tooltip: false
+      timezones: []
+      calendar:
+        blur: true
+        round_corners: true
+        alignment: "left"
+        direction: "down"
+        show_week_numbers: true
+      callbacks:
+        on_left: "toggle_calendar"
+        on_middle: "do_nothing"
+        on_right: "do_nothing"
+  volume:
+    type: "yasb.volume.VolumeWidget"
+    options:
+      label: "<span>{icon}</span>{level}"
+      label_alt: "<span>{icon}</span>{level}"
+      tooltip: false
+      mute_text: "Muted"
+      volume_icons:
+        - "\ueee8"
+        - "\uf026"
+        - "\uf027"
+        - "\uf027"
+        - "\uf028"
+      audio_menu:
+        blur: true
+        round_corners: true
+        alignment: "left"
+        direction: "down"
+        show_apps: false
+      callbacks:
+        on_left: "toggle_volume_menu"
+        on_middle: "do_nothing"
+        on_right: "toggle_mute"
+  quick_launch:
+    type: "yasb.quick_launch.QuickLaunchWidget"
+    options:
+      label: "<span>\uf002</span>"
+      search_placeholder: "Search applications..."
+      max_results: 50
+      show_icons: true
+      icon_size: 32
+      providers:
+        apps:
+          enabled: true
+          prefix: "*"
+          show_recent: true
+          max_recent: 5
+          show_description: false
+        bookmarks:
+          enabled: true
+          prefix: "*"
+          browser: "edge"
+          profile: "Default"
+        calculator:
+          enabled: true
+          prefix: "="
+        clipboard_history:
+          enabled: true
+          prefix: "cb"
+        web_search:
+          enabled: true
+          prefix: "?"
+          engine: "bing"
+        settings:
+          enabled: true
+          prefix: "!"
+        file_search:
+          enabled: true
+          prefix: "/"
+          backend: "index"
+          show_path: true
+        emoji:
+          enabled: true
+          prefix: ":"
+        color:
+          enabled: true
+          prefix: "col"
+        snippets:
+          enabled: true
+          prefix: ";"
+        vscode:
+          enabled: true
+          prefix: "vsc"
+      popup:
+        width: 720
+        height: 480
+        blur: true
+        round_corners: true
+        dark_mode: true
+      callbacks:
+        on_left: "toggle_quick_launch"
+      keybindings:
+        - keys: "ctrl+space"
+          action: "toggle_quick_launch"
+  glazewm_tiling_direction:
+    type: "glazewm.tiling_direction.GlazewmTilingDirectionWidget"
+    options:
+      horizontal_label: "\udb81\udce1"
+      vertical_label: "\udb81\udce2"
+  glazewm_workspaces:
+    type: "glazewm.workspaces.GlazewmWorkspacesWidget"
+    options:
+      hide_empty_workspaces: true
+      hide_if_offline: true
+      enable_scroll_switching: true
+  media:
+    type: "yasb.media.MediaWidget"
+    options:
+      label: "\uf001  {title}  \uec10"
+      label_alt: "\uf001  {artist} {s} {title}  \uec10"
+      separator: "-"
+      hide_empty: true
+      controls_hide: true
+      show_thumbnail: true
+      thumbnail_alpha: 100
+      thumbnail_padding: 0
+      thumbnail_edge_fade: true
+      max_field_size:
+        label: 64
+        label_alt: 64
+      scrolling_label:
+        enabled: true
+        update_interval_ms: 60
+        style: "left"
+        separator: "      "
+        always_scroll: false
+      media_menu:
+        blur: true
+        round_corners: true
+        alignment: "center"
+        direction: "down"
+        thumbnail_corner_radius: 8
+        thumbnail_size: 160
+        max_title_size: 100
+        max_artist_size: 100
+        show_source: false
+      media_menu_icons:
+        play: "\uf04b"
+        pause: "\uf04c"
+        prev_track: "\uf048"
+        next_track: "\uf051"
+      callbacks:
+        on_left: "toggle_media_menu"
+        on_middle: "do_nothing"
+        on_right: "toggle_label"
+      progress_bar:
+        enabled: true
+  glazewm_binding_mode:
+    type: "glazewm.binding_mode.GlazewmBindingModeWidget"
+    options:
+      label: "<span>{icon}</span>"
+      hide_if_no_active: false
+      icons:
+        none: "\uf005"
+        resize: "\uf0db"
+        pause: "\uf121"
+      binding_modes_to_cycle_through: ["none", "resize", "pause"]
+      callbacks:
+        on_left: "next_binding_mode"
+        on_middle: "do_nothing"
+        on_right: "disable_binding_mode"
+  cpu:
+    type: "yasb.cpu.CpuWidget"
+    options:
+      label: "<span>\uf4bc</span>{info[percent][total]}%"
+      label_alt: "<span>\uf4bc</span>CPU: {info[percent][total]}%"
+      update_interval: 5000
+      hide_decimal: true
+      callbacks:
+        on_left: "toggle_label"
+        on_middle: "do_nothing"
+        on_right: "do_nothing"
+  memory:
+    type: "yasb.memory.MemoryWidget"
+    options:
+      label: "<span>\uefc5</span>{virtual_mem_percent}%"
+      label_alt: "<span>\uefc5</span>RAM: {virtual_mem_percent}%"
+      update_interval: 5000
+      hide_decimal: true
+      callbacks:
+        on_left: "toggle_label"
+        on_middle: "do_nothing"
+        on_right: "do_nothing"
+  gpu:
+    type: "yasb.gpu.GpuWidget"
+    options:
+      label: "<span>\uf2db</span>{info[utilization]}%"
+      label_alt: "<span>\uf2db</span>GPU: {info[utilization]}%"
+      update_interval: 5000
+      hide_decimal: true
+      callbacks:
+        on_left: "toggle_label"
+        on_middle: "do_nothing"
+        on_right: "do_nothing"
+  notifications:
+    type: "yasb.notifications.NotificationsWidget"
+    options:
+      label: "<span>{icon}</span>"
+      hide_empty: false
+      tooltip: false
+      icons:
+        new: "\udb84\udd6b"
+        default: "\udb80\udc9a"
+      callbacks:
+        on_left: "toggle_notification"
+        on_right: "do_nothing"
+        on_middle: "do_nothing"
+  power_menu:
+    type: "yasb.power_menu.PowerMenuWidget"
+    options:
+      label: "<span>\uf004</span>"
+      uptime: true
+      show_user: true
+      blur: false
+      blur_background: true
+      button_row: 6
+      menu_style: "fullscreen"
+      buttons:
+        signout: ["\uf08b", "Sign Out"]
+        shutdown: ["\uf011", "Shut Down"]
+        restart: ["\uead2", "Restart"]
+        sleep: ["\udb82\udd04", "Sleep"]
+        lock: ["\uf023", "Lock"]
+        cancel: ["\udb81\udf3a", "Cancel"]
